@@ -1,0 +1,29 @@
+PODS:
+  - EasyAnimation (1.0.5)
+  - Koloda (3.0.0):
+    - pop (~> 1.0)
+  - PermissionScope (1.0.2)
+  - pop (1.0.9)
+  - SCLAlertView (0.5.4)
+  - TextFieldEffects (1.2.0)
+  - WYMaterialButton (1.2.1):
+    - pop (~> 1.0)
+
+DEPENDENCIES:
+  - EasyAnimation
+  - Koloda
+  - PermissionScope
+  - SCLAlertView
+  - TextFieldEffects
+  - WYMaterialButton
+
+SPEC CHECKSUMS:
+  EasyAnimation: 32821f37dd39187e7364369a3d8f65d38405cf1d
+  Koloda: 315aa5d2ef4138df90c42ee77c18af0727528e6a
+  PermissionScope: 860828c5516d349b6f49e5491799cfef33c5ccc7
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  SCLAlertView: 081f824b17b7cf41057159535591f4d6fc8acde3
+  TextFieldEffects: bc4fd3bd557321bd61a0762f3f50965477a36f62
+  WYMaterialButton: 4ad7428ab02c3e89f97f04482a84b57170008d91
+
+COCOAPODS: 0.39.0
