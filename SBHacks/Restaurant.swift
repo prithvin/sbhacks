@@ -32,23 +32,35 @@ class Restaurant {
         self.numberOfReviews = numberOfReviews;
         self.imageURLOfRestaurant = imageURLOfRestaurant;
         self.imageURLOfReviews = imageURLOfReviews;
-        loadImages();
+        
+        
+        let url = NSURL(string: imageURLOfRestaurant)
+        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        self.restaurantImage = UIImage(data: data!);
+        
+        let url2 = NSURL(string: imageURLOfReviews)
+        let data2 = NSData(contentsOfURL: url2!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        self.reviewsImage = UIImage(data: data2!);
+        
+    
     }
     
     
-    func loadImages () {
+    func loadImages (completion: () -> Void) {
         if let checkedUrl = NSURL(string: self.imageURLOfRestaurant) {
             downloadImage(checkedUrl, callback: {
                 (img : UIImage) in
                 self.restaurantImage = img;
+                if let checkedUrl = NSURL(string: self.imageURLOfReviews) {
+                    self.downloadImage(checkedUrl, callback: {
+                        (img : UIImage) in
+                        self.reviewsImage = img;
+                        completion();
+                    })
+                }
             })
         }
-        if let checkedUrl = NSURL(string: self.imageURLOfReviews) {
-            downloadImage(checkedUrl, callback: {
-                (img : UIImage) in
-                self.reviewsImage = img;
-            })
-        }
+       
         
     }
     

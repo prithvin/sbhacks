@@ -15,13 +15,43 @@ class APICaller {
     
     var session : String!;
     var userPhoneNumber : String!;
-    let baseURL = "http://forkchop-62260.onmodulus.net/api/";
+    let baseURL = "http://forkshop-62260.mod.bz/api/";
     
     let MAKE_RECURSIVE_CALL = 3;
     let SUCCESS = 1;
     let ERROR = 2;
     
 
+    
+    
+    
+    
+    
+    func likeRestaurant(queryNum:Int = 0, restaurantId: String, callback : (JSON!) -> Void) {
+        let parameters = ["SessionId" : session, "PhoneNumber" : userPhoneNumber, "RestaurantId" : restaurantId];
+        
+        quickAPICaller("set", parameters: parameters, type: Alamofire.Method.POST, queryNum: queryNum, callback: {
+            (status : Int, data : JSON!) in
+            
+            if (status == self.MAKE_RECURSIVE_CALL) {
+                self.getPeopleInSession(queryNum + 1, callback: callback);
+            }
+                
+            else if (status == self.ERROR) {
+                callback(nil);
+            }
+            else if (status == self.SUCCESS) {
+                callback(data);
+            }
+        });
+        
+    }
+    
+    
+    
+    
+    
+    
     func getPeopleInSession(queryNum:Int = 0, callback : (JSON!) -> Void) {
         let parameters = ["SessionId" : session, "PhoneNumber" : userPhoneNumber];
         
@@ -108,6 +138,27 @@ class APICaller {
         });
     }
     
+    func getRestaurants (queryNum:Int = 0, callback : (JSON!) -> Void) {
+        
+        let parameters = ["SessionId" : session, "PhoneNumber": userPhoneNumber];
+        
+        print("GET RESTAURANTS");
+        quickAPICaller("getRestaurants", parameters: parameters, type: Alamofire.Method.POST, queryNum: queryNum, callback: {
+            (status : Int, data : JSON!) in
+            
+            if (status == self.MAKE_RECURSIVE_CALL) {
+                self.getRestaurants(queryNum + 1, callback: callback);
+            }
+                
+            else if (status == self.ERROR) {
+                callback(nil);
+            }
+            else if (status == self.SUCCESS) {
+
+                callback(data);
+            }
+        });
+    }
     
     
     
@@ -130,17 +181,18 @@ extension APICaller {
             .responseJSON { response in
                 
                 if (response.result.isSuccess) {
+        
                     
            
                     
                     var data : SwiftyJSON.JSON = SwiftyJSON.JSON(response.result.value!);
-            
+              
   
                     if (data["Status"].stringValue == "SUCCESS") {
                         
-                        self.session = data["Data"].stringValue;
-                        
-                        
+                        //self.session = data["Data"].stringValue;
+                       
+                      
                         callback(self.SUCCESS, data["Data"]);
                     }
                     else if (data["Status"].stringValue == "ERROR") {

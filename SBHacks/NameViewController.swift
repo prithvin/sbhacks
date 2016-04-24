@@ -72,7 +72,7 @@ class NameViewController: UIViewController, UITextFieldDelegate {
                     self.nameField.resignFirstResponder(); // makes it so that nameFiled is not selected if it is already
                 
                     self.nameLabel.text = "What's your phone number?";
-                    changeBottom.constant = 0
+                    self.changeBottom.constant = 0
                 });
                 
                 nextCount += 1;
@@ -93,7 +93,7 @@ class NameViewController: UIViewController, UITextFieldDelegate {
                     self.nameField.resignFirstResponder(); // makes it so that nameFiled is not selected if it is already
                     self.nameField.keyboardType = UIKeyboardType.Default;
                     self.nameLabel.text = "What type of food do you like?";
-                    changeBottom.constant = 0;
+                    self.changeBottom.constant = 0;
                 });
                 nextCount += 1;
             }

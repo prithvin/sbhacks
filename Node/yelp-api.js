@@ -14,17 +14,19 @@ function yelpAPI(searchPhrase, latitude, longitude, callback) {
   });
    
   // See http://www.yelp.com/developers/documentation/v2/search_api 
-  yelp.search({ term: searchPhrase,"location":cities.gps_lookup(latitude, longitude).city, "cll": "" + latitude + "," + longitude})
+  yelp.search({ term: searchPhrase,"category" : "restaurant", "location":cities.gps_lookup(latitude, longitude).city, "cll": "" + latitude + "," + longitude})
   .then(function (data) {
     var restaurants = [];
-    var restaurant = {};
+    
 
     start = {
       latitude: latitude,
       longitude: longitude
     };
 
+
     data.businesses.forEach(function(business){
+      var restaurant = {};
     
       //Use haversine to calculate business distance
       end = {
@@ -49,6 +51,7 @@ function yelpAPI(searchPhrase, latitude, longitude, callback) {
     callback(restaurants);
   })
   .catch(function (err) {
+    console.log(err);
     callback(null);
   });
   

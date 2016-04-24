@@ -1,7 +1,7 @@
 var Session = require('../models/session');
 var express = require('express');
 var router = express.Router();
-var yelp = require('yelpAPI');
+var yelp = require('../yelp-api');
 
 function generateSessionToken(callback) {
     var code = Math.floor(100000 + Math.random() * 900000);
@@ -180,7 +180,7 @@ router.post('/saveLatLong', function (req, res) {
   }
 });
 
-router.get('/getPeopleInSession', function (req, res) {
+router.post('/getPeopleInSession', function (req, res) {
   if (noErrorsIfDataNotSent(req.body.Data, ["SessionId", "PhoneNumber"], res)) {
 
      Session.findOne({SessionCode : req.body.Data.SessionId}, function (err, data) {
@@ -208,13 +208,13 @@ router.get('/getPeopleInSession', function (req, res) {
   }
 });
 
-router.get('/getRestaurants', function (req, res) {
+router.post('/getRestaurants', function (req, res) {
   if (noErrorsIfDataNotSent(req.body.Data, ["SessionId", "PhoneNumber"], res)) {
     Session.findOne({SessionCode : req.body.Data.SessionId}, function (err, data) {
       if (err || data == null) {
         generateError(res, "Looks like this session token is not valid!");
       }
-      else if (data.Restaurants == null || data.Restaurants.length == 0 ) {
+      else {
         if (data.Users.length < 1) {
            generateError(res, "This is not a valid sesion!");
         }
@@ -230,14 +230,27 @@ router.get('/getRestaurants', function (req, res) {
             generateError(res, "You are not in the session!");
           }
           else {
-            yelpAPI(cusines, data.Users[index].Location.Latitude, data.Users[index].Location.Longitude, function (data) {
+            yelp(cusines, data.Users[index].Location.Latitude, data.Users[index].Location.Longitude.toFixed(1), function (data) {
               console.log(data);
-            })
-          }
+              if (data == null || !data) {
+                res.send({
+                "Status" : "ERROR",
+                "Data" : "Something random happened" });
+            
+              }
+              else {
+                res.send({
+                "Status" : "SUCCESS",
+                "Data" : data });
+            
+              }
+              
+          });
         }
       }
-    }); 
-  }
+    }
+  });
+}
 });
 
 

@@ -12,6 +12,7 @@ import SCLAlertView
 import CoreLocation
 import EasyAnimation
 import MessageUI
+import SwiftyJSON
 
 class TinderViewController: UIViewController, MFMessageComposeViewControllerDelegate {
 
@@ -20,12 +21,17 @@ class TinderViewController: UIViewController, MFMessageComposeViewControllerDele
     @IBOutlet var miniCardHeight: NSLayoutConstraint!
     @IBOutlet var whoIsInSession: UILabel!
     @IBOutlet var codeToInviteLabel: UILabel!
+    var recipientsOfText = [String]();
     var hasBeenClicked : Bool = false;
     let pscope = PermissionScope();
+    
     
     override func viewDidLoad() {
         super.viewDidLoad();
         codeToInviteLabel.text = "Code to Invite:  \(restaurantCode)"
+      
+
+        
         
         
         
@@ -35,18 +41,20 @@ class TinderViewController: UIViewController, MFMessageComposeViewControllerDele
     func messageComposeViewController(_ controller: MFMessageComposeViewController,
                                         didFinishWithResult result: MessageComposeResult) {
     }
+    @IBOutlet var actualKoladaView: ActualCardKolodaView!
     
     @IBAction func createGroupChat(sender: AnyObject) {
         let composeVC = MFMessageComposeViewController()
         composeVC.messageComposeDelegate = self
         
         // Configure the fields of the interface.
-        composeVC.recipients = ["4085551212"]
+        composeVC.recipients = recipientsOfText;
         composeVC.body = "Hello from California!"
         
         // Present the view controller modally.
         self.presentViewController(composeVC, animated: true, completion: nil)
     }
+    
     
     @IBAction func codeToInviteAlert(sender: AnyObject) {
         SCLAlertView().showTitle(
@@ -97,31 +105,58 @@ class TinderViewController: UIViewController, MFMessageComposeViewControllerDele
         
         pscope.addPermission(LocationWhileInUsePermission(),
                              message: "We want to send you to Indranil's house.")
-        showPermissionView();
+          self.miniCard.frame.origin.y  = self.view.frame.height - 70;
+        AppDelegate.sharedInstanceAPI.getPeopleInSession(callback: {
+            (data : JSON!) in
+            
+            if (data != nil) {
+                var str : String = "This session is with ";
+                var x = 0;
+                for x in 0 ..< data.count {
+                    str += (data[x].dictionary!["Name"]?.stringValue)! + ", ";
+                    self.recipientsOfText.append((data[x].dictionary!["Phone"]?.stringValue)!);
+                }
+                self.whoIsInSession.text = str;
+            }
+        })
+
+        
+        
+        showPermissionView({
+           // let locationManager = CLLocationManager();
+           // let value = locationManager.location!;
+            let latitude = 34.4116;
+            let longitude = -119.845;
+            
+            AppDelegate.sharedInstanceAPI.saveLatLong(latitude: latitude, longitude: longitude, callback: {
+                (str : String!) in
+                
+                self.actualKoladaView.fetchOtherData();
+                if (str == nil) {
+                    
+                }
+                else {
+                    
+                    // go on to fetch cards, restuarnats and all that shit
+                }
+            })
+ 
+        });
         miniCard.frame.origin.y = self.view.frame.height - 70;
     }
     
-    func showPermissionView () {
+    func showPermissionView (completion: () -> Void) {
         pscope.show({ finished, results in
             if finished && results[0].status != .Authorized {
                 self.userNotExpectedPermission();
                
                 
             }
-            else {
-                let locationManager = CLLocationManager();
-                let latitude = locationManager.location!.coordinate.latitude;
-                let longitude = locationManager.location!.coordinate.longitude;
+            else if finished {
+                completion();
                 
-                AppDelegate.sharedInstanceAPI.saveLatLong(latitude: latitude, longitude: longitude, callback: {
-                    (str : String!) in
-                    if (str == nil) {
-                        
-                    }
-                    else {
-                        // go on to fetch cards, restuarnats and all that shit
-                    }
-                })
+
+                
          
                     
    
@@ -148,7 +183,26 @@ class TinderViewController: UIViewController, MFMessageComposeViewControllerDele
     func userNotExpectedPermission () {
         let alertView = SCLAlertView();
         alertView.addButton("Ok!") {
-            self.showPermissionView();
+            self.showPermissionView({
+                //let locationManager = CLLocationManager();
+               // let value = locationManager.location!;
+                let latitude = 34.4116;
+                let longitude = -119.845;
+                
+                AppDelegate.sharedInstanceAPI.saveLatLong(latitude: latitude, longitude: longitude, callback: {
+                    (str : String!) in
+                    
+                    self.actualKoladaView.fetchOtherData();
+                    if (str == nil) {
+                        
+                    }
+                    else {
+                        
+                        // go on to fetch cards, restuarnats and all that shit
+                    }
+                })
+
+            });
         }
         alertView.showCloseButton = false;
         alertView.showError("Uh Oh!", subTitle: "We need your location to help find restaurants nearby!") // Errors

@@ -346,6 +346,13 @@
                                     <constraint firstItem="DJk-Lp-ocp" firstAttribute="top" secondItem="6ar-pH-bwZ" secondAttribute="top" constant="8" id="tbM-SJ-7h6"/>
                                 </constraints>
                             </view>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" selectionStyle="default" indentationWidth="10" translatesAutoresizingMaskIntoConstraints="NO" id="9nO-dH-xTq">
+                                <rect key="frame" x="0.0" y="115" width="320" height="44"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9nO-dH-xTq" id="TOn-wc-Aso">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
@@ -370,6 +377,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actualKoladaView" destination="VkJ-XD-CzZ" id="7Sk-xQ-A4Y"/>
                         <outlet property="codeToInviteLabel" destination="bGf-aO-UsK" id="0Ao-Y7-Gpb"/>
                         <outlet property="miniCard" destination="6ar-pH-bwZ" id="PTd-vg-5eh"/>
                         <outlet property="miniCardHeight" destination="EiK-4L-8WR" id="hfi-lX-Ln1"/>

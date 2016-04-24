@@ -49,6 +49,7 @@ class CardRestaurantView: UIView {
         restaurantCategories.text = item.restaurantCategories;
         distance.text = item.distance;
         numberReviews.text = "\(item.numberOfReviews) reviews";
+        
     }
     
 }
