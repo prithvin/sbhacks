@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F18c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="CardRestaurantView" id="iN0-l3-epB" customClass="CardRestaurantView" customModule="SBHacks" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="238" height="309"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="random_food_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="2FV-7K-wKm">
+                    <rect key="frame" x="5" y="5" width="228" height="228"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="2FV-7K-wKm" secondAttribute="height" multiplier="1:1" id="ToK-OM-Zdv"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woodstock's Pizza" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZ9-dp-mRa">
+                    <rect key="frame" x="8" y="241" width="222" height="23.5"/>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.5 miles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QK5-eH-XpM">
+                    <rect key="frame" x="185" y="285" width="45" height="15.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="QK5-eH-XpM" secondAttribute="height" multiplier="26:9" id="9bt-V2-JYi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yelp" translatesAutoresizingMaskIntoConstraints="NO" id="k3O-h5-WHo">
+                    <rect key="frame" x="161" y="193" width="72" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="72" id="9c5-Kf-gyq"/>
+                        <constraint firstAttribute="width" secondItem="k3O-h5-WHo" secondAttribute="height" multiplier="9:5" id="COg-gI-AUQ"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reviews" translatesAutoresizingMaskIntoConstraints="NO" id="l6A-E2-J6m">
+                    <rect key="frame" x="8" y="284" width="75" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="l6A-E2-J6m" secondAttribute="height" multiplier="75:17" id="5My-EP-MG0"/>
+                        <constraint firstAttribute="width" constant="75" id="L0e-Lx-Neo"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Italian, Mexican" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlZ-Fp-FvT">
+                    <rect key="frame" x="8" y="266" width="222" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="137 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gH4-xT-sP8">
+                    <rect key="frame" x="91" y="285.5" width="61" height="15.5"/>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="gH4-xT-sP8" secondAttribute="bottom" constant="8" id="27I-Re-RFy"/>
+                <constraint firstAttribute="trailing" secondItem="QlZ-Fp-FvT" secondAttribute="trailing" constant="8" id="30G-dq-Dmp"/>
+                <constraint firstAttribute="trailing" secondItem="QK5-eH-XpM" secondAttribute="trailing" constant="8" id="A1m-Ys-Y7G"/>
+                <constraint firstItem="QlZ-Fp-FvT" firstAttribute="top" secondItem="CZ9-dp-mRa" secondAttribute="bottom" constant="2" id="FYu-kE-j9C"/>
+                <constraint firstItem="2FV-7K-wKm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="JNu-hV-ojv"/>
+                <constraint firstItem="k3O-h5-WHo" firstAttribute="baseline" secondItem="2FV-7K-wKm" secondAttribute="baseline" id="KGY-Rc-GaK"/>
+                <constraint firstItem="l6A-E2-J6m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="PMJ-PH-Dp4"/>
+                <constraint firstItem="QlZ-Fp-FvT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Ssw-YW-d7W"/>
+                <constraint firstItem="CZ9-dp-mRa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="U3F-XL-ugZ"/>
+                <constraint firstAttribute="trailing" secondItem="CZ9-dp-mRa" secondAttribute="trailing" constant="8" id="Vgp-R6-EBg"/>
+                <constraint firstItem="gH4-xT-sP8" firstAttribute="leading" secondItem="l6A-E2-J6m" secondAttribute="trailing" constant="8" id="Vr5-hJ-VjC"/>
+                <constraint firstAttribute="bottom" secondItem="QK5-eH-XpM" secondAttribute="bottom" constant="8" id="fxA-jM-2ad"/>
+                <constraint firstAttribute="trailing" secondItem="2FV-7K-wKm" secondAttribute="trailing" constant="5" id="ji3-wh-y9N"/>
+                <constraint firstAttribute="bottom" secondItem="l6A-E2-J6m" secondAttribute="bottom" constant="8" id="jry-V9-dXP"/>
+                <constraint firstItem="2FV-7K-wKm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="o5X-zw-FY6"/>
+                <constraint firstItem="CZ9-dp-mRa" firstAttribute="top" secondItem="2FV-7K-wKm" secondAttribute="bottom" constant="8" id="oDY-4j-ViS"/>
+                <constraint firstItem="k3O-h5-WHo" firstAttribute="trailing" secondItem="2FV-7K-wKm" secondAttribute="trailing" id="wjg-yF-hZh"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="distance" destination="QK5-eH-XpM" id="BQq-ap-XJb"/>
+                <outlet property="numberReviews" destination="gH4-xT-sP8" id="B9X-Zi-BTh"/>
+                <outlet property="restaurantCategories" destination="QlZ-Fp-FvT" id="JR5-eD-Ghh"/>
+                <outlet property="restaurantImage" destination="2FV-7K-wKm" id="wM7-DF-ArF"/>
+                <outlet property="restaurantName" destination="CZ9-dp-mRa" id="Fp5-JX-poc"/>
+                <outlet property="reviewsURL" destination="l6A-E2-J6m" id="2hR-PO-shg"/>
+            </connections>
+            <point key="canvasLocation" x="180" y="167.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="random_food_placeholder" width="125" height="125"/>
+        <image name="reviews" width="144" height="29"/>
+        <image name="yelp" width="337" height="191"/>
+    </resources>
+</document>

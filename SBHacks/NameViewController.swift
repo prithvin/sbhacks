@@ -15,6 +15,10 @@ class NameViewController: UIViewController {
     var nextCount = 0; // count increases once next is pressed once
     @IBOutlet var nameField: YoshikoTextField!
     @IBOutlet var nameLabel: UILabel!
+    var creatingNewSession  : Int!;
+    var name : String!;
+    var cuisine : String!;
+    var phone : String!;
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,16 +37,23 @@ class NameViewController: UIViewController {
         if (nextCount == 0) {
             // do database sending for Name
             
-            
-            self.preAnimateView({
-                self.nameField.placeholder = "Phone Number";
-                self.nameField.keyboardType = UIKeyboardType.NumberPad;
-                self.nameField.text = "";
-                self.nameField.resignFirstResponder(); // makes it so that nameFiled is not selected if it is already
+            if (nameField.text!.characters.count < 3 ||
+                nameField.text!.characters.indexOf(" ") == nil) {
+                SCLAlertView().showError("Invalid Name", subTitle: "Please provide your full name") // Error
+            }
+            else {
+                name = self.nameField.text;
+                self.preAnimateView({
+                    self.nameField.placeholder = "Phone Number";
+                    self.nameField.keyboardType = UIKeyboardType.NumberPad;
+                    self.nameField.text = "";
+                    self.nameField.resignFirstResponder(); // makes it so that nameFiled is not selected if it is already
                 
-                self.nameLabel.text = "What's your phone number?";
-            });
-            nextCount += 1;
+                    self.nameLabel.text = "What's your phone number?";
+                });
+                
+                nextCount += 1;
+            }
         }
         else if (nextCount == 1) {
             // do database sending for phone number
@@ -51,13 +62,14 @@ class NameViewController: UIViewController {
                 SCLAlertView().showError("Invalid Phone Number", subTitle: "Please provide a valid phone number") // Error
             }
             else {
+                phone = (self.nameField.text);
                 self.preAnimateView({
                     self.nameField.placeholder = "Cusines";
                     self.nameField.keyboardType = UIKeyboardType.NumberPad;
                     self.nameField.text = "";
                     self.nameField.resignFirstResponder(); // makes it so that nameFiled is not selected if it is already
                     
-                    self.nameLabel.text = "What type of food do you want?";
+                    self.nameLabel.text = "What type of food do you like?";
                 });
                 nextCount += 1;
             }
@@ -65,9 +77,54 @@ class NameViewController: UIViewController {
             
         }
         else {
-            let nextViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TinderViewController") as! TinderViewController;
-            nextViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal;
-            self.presentViewController(nextViewController, animated: true, completion:nil)
+            cuisine = self.nameField.text;
+            
+            // meaning that the session id is not there, so this means that you need ot create a new 
+            // session rather than pass a new session in
+            if (creatingNewSession == nil) {
+                AppDelegate.sharedInstanceAPI.createNewSession(nameOfUser: name, phoneOfUser: phone, cuisine: cuisine, callback: {
+                    (str : String!) in
+            
+                    if (str == nil) {
+                        
+                    }
+                    else {
+                        let nextViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TinderViewController") as! TinderViewController;
+                        nextViewController.restaurantCode = Int(str!);
+                        nextViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal;
+                        self.presentViewController(nextViewController, animated: true, completion:nil);
+                    }
+            
+                });
+            }
+            else {
+                print("OMG PLEASE BEHERE PLZ PLZ PLZPL PLZ");
+                AppDelegate.sharedInstanceAPI.joinUserSession(nameOfUser: name, phoneOfUser: phone, cuisine: cuisine, sessionId: creatingNewSession,  callback: {
+                    (str : String!) in
+                    
+                    if (str == nil) {
+                        
+                    }
+                    else {
+                        let alertView = SCLAlertView();
+                        alertView.addButton("Ok!") {
+                            
+                            let nextViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TinderViewController") as! TinderViewController;
+                            
+                            // passing in session code
+                            nextViewController.restaurantCode = self.creatingNewSession!;
+                            nextViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal;
+                            self.presentViewController(nextViewController, animated: true, completion:nil);
+                            
+                        }
+                        alertView.showCloseButton = false;
+                        alertView.showSuccess(":)", subTitle: str) // Errors
+                        
+                        
+                    }
+                    
+                });
+            }
         }
     }
     

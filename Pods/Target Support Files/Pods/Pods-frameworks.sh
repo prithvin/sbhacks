@@ -84,19 +84,23 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/Alamofire.framework"
   install_framework "Pods/EasyAnimation.framework"
   install_framework "Pods/Koloda.framework"
   install_framework "Pods/PermissionScope.framework"
   install_framework "Pods/SCLAlertView.framework"
+  install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/TextFieldEffects.framework"
   install_framework "Pods/WYMaterialButton.framework"
   install_framework "Pods/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/Alamofire.framework"
   install_framework "Pods/EasyAnimation.framework"
   install_framework "Pods/Koloda.framework"
   install_framework "Pods/PermissionScope.framework"
   install_framework "Pods/SCLAlertView.framework"
+  install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/TextFieldEffects.framework"
   install_framework "Pods/WYMaterialButton.framework"
   install_framework "Pods/pop.framework"

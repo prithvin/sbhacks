@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>EasyAnimation.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -25,6 +30,11 @@
 			<false/>
 		</dict>
 		<key>SCLAlertView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,22 +62,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1B76E0C285B2C3A1B2B1E6FACD15B868</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2AF9897D988A051916617D917F213BE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3D259E91788DFF4CE135A1BCFB723048</key>
+		<key>5142D4575D168157DBDE115BB78281B2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3DB1A1C106D3004305CCBE160EFDE8BD</key>
+		<key>68F06191530BC63A32183B3A6233A0C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>984EA2176D8D2A98A93642F0B3109F55</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AAA6FA7808C8D5D62CB2FB07AE7AFEB7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B16127CECCC58BB660D51D21AC8F0B20</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C55E46AC6A1E70A6AA25E306AE545375</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9A6E4DE25091E635612ECE71EC85AFA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC8562FB56D4AF3D47EF44BF93B8A78F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF5E879B41839EBE658F0F5C5B2E7603</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -30,11 +30,11 @@ class ViewController: UIViewController {
     @IBAction func joinSessionWithId(sender: AnyObject) {
         
         // error, invalid sessionid
-        if (sessionId.text!.characters.count != 7) {
-            SCLAlertView().showError("Incorrect Session ID", subTitle: "Your session ID must be 7 characters long.") // Error
+        if (sessionId.text!.characters.count != 6) {
+            SCLAlertView().showError("Incorrect Session ID", subTitle: "Your session ID must be 6 characters long.") // Error
         }
         else {
-            askForName();
+            askForName(true);
         }
         
         // then ask for Name and Phone
@@ -42,16 +42,17 @@ class ViewController: UIViewController {
 
     @IBAction func createSession(sender: AnyObject) {
         
+        askForName(false);
         
-        askForName();
         // then ask for Name and Phone
     }
     
-    func askForName () {
+    func askForName (oldSession: Bool) {
         let nextViewController = self.storyboard!.instantiateViewControllerWithIdentifier("NameViewController") as! NameViewController
         animateAndHideTops({
-            
-            
+            if (oldSession == true) {
+                nextViewController.creatingNewSession = Int(self.sessionId.text!);
+            }
             self.presentViewController(nextViewController, animated: false, completion:nil)
         });
         //nextViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve;

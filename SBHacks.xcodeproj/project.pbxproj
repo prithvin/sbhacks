@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C90733142B799C4E3E249EA /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAE4A1DBAE0601C61E6CF19 /* Pods.framework */; };
+		CB63AA561CCC556700B1EE01 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63AA551CCC556700B1EE01 /* APICaller.swift */; };
 		CBF86E831CCB8EA200782C74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF86E821CCB8EA200782C74 /* AppDelegate.swift */; };
 		CBF86E851CCB8EA200782C74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF86E841CCB8EA200782C74 /* ViewController.swift */; };
 		CBF86E881CCB8EA200782C74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF86E861CCB8EA200782C74 /* Main.storyboard */; };
@@ -16,11 +17,16 @@
 		CBF86E901CCB8EA200782C74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF86E8E1CCB8EA200782C74 /* LaunchScreen.storyboard */; };
 		CBF86E981CCBDBCB00782C74 /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF86E971CCBDBCB00782C74 /* NameViewController.swift */; };
 		CBF86E9A1CCBED2400782C74 /* TinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF86E991CCBED2400782C74 /* TinderViewController.swift */; };
+		CBF86E9C1CCC2AEC00782C74 /* ActualCardKolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF86E9B1CCC2AEC00782C74 /* ActualCardKolodaView.swift */; };
+		CBF86E9E1CCC397400782C74 /* CardRestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF86E9D1CCC397400782C74 /* CardRestaurantView.swift */; };
+		CBF86EA01CCC398B00782C74 /* CardRestaurantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBF86E9F1CCC398B00782C74 /* CardRestaurantView.xib */; };
+		CBF86EA21CCC400300782C74 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF86EA11CCC400300782C74 /* Restaurant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3EAE4A1DBAE0601C61E6CF19 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		601CDDFE0BB32BD33AD8E330 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CB63AA551CCC556700B1EE01 /* APICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		CBF86E7F1CCB8EA200782C74 /* SBHacks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBHacks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBF86E821CCB8EA200782C74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBF86E841CCB8EA200782C74 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,6 +37,10 @@
 		CBF86E911CCB8EA200782C74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBF86E971CCBDBCB00782C74 /* NameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
 		CBF86E991CCBED2400782C74 /* TinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinderViewController.swift; sourceTree = "<group>"; };
+		CBF86E9B1CCC2AEC00782C74 /* ActualCardKolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActualCardKolodaView.swift; sourceTree = "<group>"; };
+		CBF86E9D1CCC397400782C74 /* CardRestaurantView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRestaurantView.swift; sourceTree = "<group>"; };
+		CBF86E9F1CCC398B00782C74 /* CardRestaurantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardRestaurantView.xib; sourceTree = "<group>"; };
+		CBF86EA11CCC400300782C74 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		E1FFC2CF0B8FED97A3ED3FBB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				CBF86E821CCB8EA200782C74 /* AppDelegate.swift */,
+				CB63AA551CCC556700B1EE01 /* APICaller.swift */,
 				CBF86E841CCB8EA200782C74 /* ViewController.swift */,
 				CBF86E861CCB8EA200782C74 /* Main.storyboard */,
 				CBF86E8C1CCB8EA200782C74 /* Assets.xcassets */,
@@ -93,6 +104,10 @@
 				CBF86E891CCB8EA200782C74 /* SBHacks.xcdatamodeld */,
 				CBF86E971CCBDBCB00782C74 /* NameViewController.swift */,
 				CBF86E991CCBED2400782C74 /* TinderViewController.swift */,
+				CBF86E9B1CCC2AEC00782C74 /* ActualCardKolodaView.swift */,
+				CBF86EA11CCC400300782C74 /* Restaurant.swift */,
+				CBF86E9D1CCC397400782C74 /* CardRestaurantView.swift */,
+				CBF86E9F1CCC398B00782C74 /* CardRestaurantView.xib */,
 			);
 			path = SBHacks;
 			sourceTree = "<group>";
@@ -159,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBF86E901CCB8EA200782C74 /* LaunchScreen.storyboard in Resources */,
+				CBF86EA01CCC398B00782C74 /* CardRestaurantView.xib in Resources */,
 				CBF86E8D1CCB8EA200782C74 /* Assets.xcassets in Resources */,
 				CBF86E881CCB8EA200782C74 /* Main.storyboard in Resources */,
 			);
@@ -219,9 +235,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBF86E9C1CCC2AEC00782C74 /* ActualCardKolodaView.swift in Sources */,
 				CBF86E851CCB8EA200782C74 /* ViewController.swift in Sources */,
 				CBF86E831CCB8EA200782C74 /* AppDelegate.swift in Sources */,
+				CBF86E9E1CCC397400782C74 /* CardRestaurantView.swift in Sources */,
+				CB63AA561CCC556700B1EE01 /* APICaller.swift in Sources */,
 				CBF86E9A1CCBED2400782C74 /* TinderViewController.swift in Sources */,
+				CBF86EA21CCC400300782C74 /* Restaurant.swift in Sources */,
 				CBF86E8B1CCB8EA200782C74 /* SBHacks.xcdatamodeld in Sources */,
 				CBF86E981CCBDBCB00782C74 /* NameViewController.swift in Sources */,
 			);

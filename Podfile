@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 pod "TextFieldEffects"
@@ -6,6 +7,8 @@ pod "WYMaterialButton"
 pod 'SCLAlertView'
 pod 'EasyAnimation'
 pod 'PermissionScope'
+pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+pod 'Alamofire', '~> 3.3'
 
 
 post_install do |installer|

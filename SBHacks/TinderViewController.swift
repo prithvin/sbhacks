@@ -9,19 +9,33 @@
 import UIKit
 import PermissionScope
 import SCLAlertView
+import CoreLocation
 
 class TinderViewController: UIViewController {
 
-    var restaurantCode : String! = "XXXXXX";
+    var restaurantCode : Int! = 1111111;
     
     @IBOutlet var codeToInviteLabel: UILabel!
     let pscope = PermissionScope();
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        codeToInviteLabel.text = "Code to Invite: " + restaurantCode;
+        codeToInviteLabel.text = "Code to Invite:  \(restaurantCode)"
 
         // Do any additional setup after loading the view.
+    }
+    @IBAction func codeToInviteAlert(sender: AnyObject) {
+        SCLAlertView().showTitle(
+            "Invite People to Join", // Title of view
+            subTitle: "Share the code with your friends and help", // String of view
+            duration: 2.0, // Duration to show before closing automatically, default: 0.0
+            completeText: "Ok", // Optional button value, default: ""
+            style: SCLAlertViewStyle.Info, // Styles - see below.
+            colorStyle: 0xA429FF,
+            colorTextButton: 0xFFFFFF
+        );
+        
+        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -37,6 +51,27 @@ class TinderViewController: UIViewController {
             if finished && results[0].status != .Authorized {
                 self.userNotExpectedPermission();
                
+                
+            }
+            else {
+                let locationManager = CLLocationManager();
+                let latitude = locationManager.location!.coordinate.latitude;
+                let longitude = locationManager.location!.coordinate.longitude;
+                
+                AppDelegate.sharedInstanceAPI.saveLatLong(latitude: latitude, longitude: longitude, callback: {
+                    (str : String!) in
+                    if (str == nil) {
+                        
+                    }
+                    else {
+                        // go on to fetch cards, restuarnats and all that shit
+                    }
+                })
+         
+                    
+   
+
+                // send latitutde and longtiutde to the backend
                 
             }
             }, cancelled: { (results) -> Void in
