@@ -1,6 +1,8 @@
 // Request API access: http://www.yelp.com/developers/getting_started/api_access 
 var Yelp = require('yelp');
 var cities = require('cities');
+var haversine = require('haversine');
+var _ = require('lodash/core');
  
 function yelpAPI(searchPhrase, latitude, longitude, callback) {
 
@@ -16,14 +18,35 @@ function yelpAPI(searchPhrase, latitude, longitude, callback) {
   .then(function (data) {
     var restaurants = [];
     var restaurant = {};
-    console.log(data)
+
+    start = {
+      latitude: latitude,
+      longitude: longitude
+    };
+
     data.businesses.forEach(function(business){
+    
+      //Use haversine to calculate business distance
+      end = {
+        latitude: business.location.coordinate.latitude,
+        longitude: business.location.coordinate.longitude
+      }
+
+      var distance = haversine(start, end);
+      var category = _.flatten(business.categories);
+
       restaurant['title'] = business.name;
       restaurant['imageURL'] = business.image_url;
-      restaurant['category'] = business.categories;
+      restaurant['category'] = category.join(", ");
+      restaurant['distance'] = distance.toFixed(2);
+      restaurant["reviewImage"] = business.rating_img_url_large;
+      restaurant["reviewCount"] = business.review_count;
+      
+      restaurants.push(restaurant);
     });
 
-    callback(data);
+
+    callback(restaurants);
   })
   .catch(function (err) {
     callback(null);
@@ -31,25 +54,9 @@ function yelpAPI(searchPhrase, latitude, longitude, callback) {
   
 }
 
-yelpAPI("indian",34.4,-119.8, function (data) {
-  console.log("OMG");
-});
+// yelpAPI("indian",34.41,-119.8, function (data) {
+//   console.log("OMG");
+//   console.log(data);
+// });
 
 module.exports = yelpAPI;
-
-/*
-  {
-    Image_URL: 
-    Title: 
-    CategoryString: Indian, Asian
-    Distance: 0.5 Miles,
-    Review_Image: 
-    #_of_Reviews: 123 
-  }
-*/
-// image
-// title
-// category in a CSSTRING
-// distance
-// review image
-// # of reviews
