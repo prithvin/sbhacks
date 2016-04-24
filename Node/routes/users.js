@@ -109,7 +109,7 @@ router.post('/joinSession', function (req, res) {
           Cuisines: req.body.Data.Cuisine,
           Location: {
             Latitude: 0,
-            Longtitude: 0
+            Longitude: 0
           }
         };
         Session.update({SessionCode: req.body.Data.SessionId}, {$push : {"Users": user}}, function (err, up) {
@@ -148,7 +148,7 @@ router.post("/create", function (req, res) {
                   Cuisines: [cuisines],
                   Location: {
                     Latitude: 0,
-                    Longtitude: 0
+                    Longitude: 0
                   }  
                 }
               ],
@@ -197,10 +197,11 @@ router.post('/saveLatLong', function (req, res) {
         var copyData = JSON.parse(JSON.stringify(data.Users[userLegitInSession].Location));
         copyData = {
           Latitude: req.body.Data.Latitude,
-          Longitude: req.body.Data.Longtitude
+          Longitude: req.body.Data.Longitude
         };
         Session.update({SessionCode : req.body.Data.SessionId, "Users.PhoneNumber" : phoneNo}, {"Users.$.Location" : copyData}, function (err, up) {
           if (err) {
+            console.log(err);
             generateError(res, "You don't exist!");
           }
           else {
@@ -209,6 +210,34 @@ router.post('/saveLatLong', function (req, res) {
         });
       }
     });
+  }
+});
+
+router.get('/getPeopleInSession', function (req, res) {
+  if (noErrorsIfDataNotSent(req.body.Data, ["SessionId", "PhoneNumber"], res)) {
+
+     Session.findOne({SessionCode : req.body.Data.SessionId}, function (err, data) {
+      if (err || data == null) {
+        generateError(res, "Looks like this session token is not valid!");
+      }
+      else {
+        var otherUsers = [];
+        for (var x = 0; x < data.Users.length; x++) {
+          if (data.Users[x].PhoneNumber != req.body.Data.PhoneNumber) {
+            otherUsers.push({
+              Name: data.Users[x].Name,
+              Phone: data.Users[x].PhoneNumber,
+              Preferences: data.Users[x].Cuisines
+            });
+          }
+        }
+        res.send({
+          "Status" : "SUCCESS",
+          "Data" : otherUsers
+        })
+
+      }
+     });
   }
 });
 
