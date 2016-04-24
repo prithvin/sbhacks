@@ -15,7 +15,7 @@ class APICaller {
     
     var session : String!;
     var userPhoneNumber : String!;
-    let baseURL = "http://9a151891.ngrok.io/api/";
+    let baseURL = "http://localhost:3000/api/";
     
     let MAKE_RECURSIVE_CALL = 3;
     let SUCCESS = 1;
@@ -47,7 +47,7 @@ class APICaller {
     func joinUserSession (queryNum:Int = 0, nameOfUser : String, phoneOfUser: String, cuisine : String, sessionId: Int, callback : (String!) -> Void) {
         let parameters = ["Name" : nameOfUser, "PhoneNumber" : phoneOfUser,  "Cuisine" : cuisine, "SessionId": sessionId];
         
-        print("HEY PLEASE BE NERE AT LEAST");
+ 
         
         quickAPICaller("joinSession", parameters: parameters, type: Alamofire.Method.POST, queryNum: queryNum, callback: {
             (status : Int, data : JSON!) in
@@ -63,7 +63,7 @@ class APICaller {
             }
             else if (status == self.SUCCESS) {
                 callback(data.stringValue);
-                self.session = data.stringValue;
+                self.session = "\(sessionId)"; // different here b/c success retursn other things
                 self.userPhoneNumber = phoneOfUser;
             }
         });

@@ -167,7 +167,8 @@ router.post("/create", function (req, res) {
 });
 
 router.post('/saveLatLong', function (req, res) {
-  if (showErrorsIfDataNotSent(req.body.Data, ["Latitude", "Longitude", "SessionId", "PhoneNumber"], res)) {
+  if (noErrorsIfDataNotSent(req.body.Data, ["Latitude", "Longitude", "SessionId", "PhoneNumber"], res)) {
+
     // this means everything is valid and reday to gooo!!
     Session.findOne({SessionCode : req.body.Data.SessionId}, function (err, data) {
       if (err || data == null) {
@@ -177,8 +178,9 @@ router.post('/saveLatLong', function (req, res) {
         var phoneNo = parseInt(req.body.Data.PhoneNumber);
         // check to see if user is in the session!
         var userLegitInSession = -1;
+        console.log(phoneNo);
         for (var x = 0; x < data.Users.length; x++) {
-          if (data.Users.PhoneNumber == phoneNo) {
+          if (data.Users[x].PhoneNumber == phoneNo) {
             userLegitInSession = x; // saves the index
             break;
             // great, user is actually legit
@@ -189,11 +191,12 @@ router.post('/saveLatLong', function (req, res) {
           generateError(res, "Um..Looks like you're not in this group!");
           return;
         }
+
         // now, it is for users in the legit, who are being added
         var copyData = JSON.parse(JSON.stringify(data.Users[userLegitInSession].Location));
         copyData = {
           Latitude: req.body.Data.Latitude,
-          Longtitude: req.body.Data.Longtitude
+          Longitude: req.body.Data.Longtitude
         };
         Session.update({SessionCode : req.body.Data.SessionId, "Users.PhoneNumber" : phoneNo}, {"Users.$.Location" : copyData}, function (err, up) {
           if (err) {
@@ -251,5 +254,11 @@ router.get("/:code/restaurants", function (req, res) {
     //query Yelp API on each / all of the categories to get list of restaurants
 
 });
+
+
+
+
+// YELP API
+
 
 module.exports = router;
