@@ -15,13 +15,32 @@ class APICaller {
     
     var session : String!;
     var userPhoneNumber : String!;
-    let baseURL = "http://localhost:3000/api/";
+    let baseURL = "http://forkchop-62260.onmodulus.net/api/";
     
     let MAKE_RECURSIVE_CALL = 3;
     let SUCCESS = 1;
     let ERROR = 2;
     
 
+    func getPeopleInSession(queryNum:Int = 0, callback : (JSON!) -> Void) {
+        let parameters = ["SessionId" : session, "PhoneNumber" : userPhoneNumber];
+        
+        quickAPICaller("getPeopleInSession", parameters: parameters, type: Alamofire.Method.POST, queryNum: queryNum, callback: {
+            (status : Int, data : JSON!) in
+            
+            if (status == self.MAKE_RECURSIVE_CALL) {
+                self.getPeopleInSession(queryNum + 1, callback: callback);
+            }
+                
+            else if (status == self.ERROR) {
+                callback(nil);
+            }
+            else if (status == self.SUCCESS) {
+                callback(data);
+            }
+        });
+
+    }
     
     func createNewSession (queryNum:Int = 0, nameOfUser : String, phoneOfUser: String, cuisine : String, callback : (String!) -> Void) {
         let parameters = ["Name" : nameOfUser, "PhoneNumber" : phoneOfUser,  "Cuisine" : cuisine];
