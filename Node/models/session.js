@@ -9,8 +9,8 @@ var sessionSchema = new Schema ({	//LATER - Trim schema
           "PhoneNumber": Number,   // Number is unique ID here
           "Cuisines": String,
           "Location": {
-            "Latitutude" : Number,
-            "Longtitude" : Number
+            "Latitude" : Number,
+            "Longitude" : Number
           }
         }
       ],
