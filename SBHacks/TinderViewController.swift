@@ -10,20 +10,44 @@ import UIKit
 import PermissionScope
 import SCLAlertView
 import CoreLocation
+import EasyAnimation
+import MessageUI
 
-class TinderViewController: UIViewController {
+class TinderViewController: UIViewController, MFMessageComposeViewControllerDelegate {
 
     var restaurantCode : Int! = 1111111;
     
+    @IBOutlet var miniCardHeight: NSLayoutConstraint!
+    @IBOutlet var whoIsInSession: UILabel!
     @IBOutlet var codeToInviteLabel: UILabel!
+    var hasBeenClicked : Bool = false;
     let pscope = PermissionScope();
     
     override func viewDidLoad() {
         super.viewDidLoad();
         codeToInviteLabel.text = "Code to Invite:  \(restaurantCode)"
-
+        
+        
+        
         // Do any additional setup after loading the view.
     }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController,
+                                        didFinishWithResult result: MessageComposeResult) {
+    }
+    
+    @IBAction func createGroupChat(sender: AnyObject) {
+        let composeVC = MFMessageComposeViewController()
+        composeVC.messageComposeDelegate = self
+        
+        // Configure the fields of the interface.
+        composeVC.recipients = ["4085551212"]
+        composeVC.body = "Hello from California!"
+        
+        // Present the view controller modally.
+        self.presentViewController(composeVC, animated: true, completion: nil)
+    }
+    
     @IBAction func codeToInviteAlert(sender: AnyObject) {
         SCLAlertView().showTitle(
             "Invite People to Join", // Title of view
@@ -37,13 +61,44 @@ class TinderViewController: UIViewController {
         
         
     }
+    @IBOutlet var miniCard: UIView!
+    @IBAction func hideOrShowMiniCard(sender: AnyObject) {
+      //  miniCardHeight
+        if (!hasBeenClicked) {
+            hasBeenClicked = true;
+            if ( miniCard.frame.origin.y == self.view.frame.height - 70) {
+                UIView.animateWithDuration(0.5, delay: 0.0, options: [ .CurveEaseOut],
+                animations: {
+                    
+                    self.miniCard.frame.origin.y = self.view.frame.height - 150;
+                    print( self.miniCard.frame.origin.y);
+                    print(self.view.frame.height);
+                    }, completion: {
+                        (omg : Bool) in
+                        self.hasBeenClicked = false;
+                });
+            }
+            else {
+                UIView.animateWithDuration(0.5, delay: 0.0, options: [ .CurveEaseOut],
+                animations: {
+                    self.miniCard.frame.origin.y  = self.view.frame.height - 70;
+                    print( self.miniCard.frame.origin.y);
+                    print(self.view.frame.height);
+                    }, completion: {
+                        (omg : Bool) in
+                        self.hasBeenClicked = false;
+                });
+            }
+            
+        }
+    }
 
     override func viewDidAppear(animated: Bool) {
         
         pscope.addPermission(LocationWhileInUsePermission(),
                              message: "We want to send you to Indranil's house.")
         showPermissionView();
-        
+        miniCard.frame.origin.y = self.view.frame.height - 70;
     }
     
     func showPermissionView () {

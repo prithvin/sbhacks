@@ -11,6 +11,7 @@ import Koloda
 
 class ActualCardKolodaView: KolodaView, KolodaViewDelegate, KolodaViewDataSource {
     
+    var currentNib = [UIView!](); // stack
     let objectDataSource = [Restaurant]();
     override func awakeFromNib() {
         self.delegate = self;
@@ -32,12 +33,12 @@ class ActualCardKolodaView: KolodaView, KolodaViewDelegate, KolodaViewDataSource
     }
     
     func koloda(koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
-        
+        currentNib.removeFirst();
     }
     func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
-        let nib = NSBundle.mainBundle().loadNibNamed("CardRestaurantView",
-                                                    owner: self, options: nil)[0] as! CardRestaurantView;
-        return nib;
+        currentNib.append(NSBundle.mainBundle().loadNibNamed("CardRestaurantView",
+            owner: self, options: nil)[0] as! CardRestaurantView);
+        return currentNib[currentNib.count - 1]; // last element pushed on the stack
     }
     
     
@@ -50,7 +51,11 @@ class ActualCardKolodaView: KolodaView, KolodaViewDelegate, KolodaViewDataSource
     }
     
     func koloda(koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, inDirection direction: SwipeResultDirection) {
+   
         
+        if let view = currentNib[0] as! CardRestaurantView! {
+            view.showBackgroundStuffBasedOnPercentage(finishPercentage, inDirection: direction);
+        }
     }
     
 }

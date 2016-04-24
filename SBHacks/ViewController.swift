@@ -10,7 +10,7 @@ import UIKit
 import SCLAlertView
 import TextFieldEffects
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var sessionId: YoshikoTextField!
     
@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet var joinSessionButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+          NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        sessionId.delegate = self;
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -25,6 +27,25 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
+    
+    func keyboardWillShow(sender: NSNotification) {
+        if let userInfo = sender.userInfo {
+            if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {
+
+            }
+        }
+    }
+    
+    
+
+    func textFieldShouldReturn( textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+  
+        return true;
+    }
+    
 
    
     @IBAction func joinSessionWithId(sender: AnyObject) {

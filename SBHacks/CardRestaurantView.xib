@@ -54,36 +54,59 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="137 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gH4-xT-sP8">
-                    <rect key="frame" x="91" y="285.5" width="61" height="15.5"/>
+                    <rect key="frame" x="91" y="285" width="61" height="15.5"/>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2W-pE-kMI">
+                    <rect key="frame" x="0.0" y="0.0" width="238" height="309"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-Cm-ahJ">
+                            <rect key="frame" x="44.5" y="80" width="150" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="Lmk-GD-yjz"/>
+                                <constraint firstAttribute="width" secondItem="ixj-Cm-ahJ" secondAttribute="height" multiplier="1:1" id="lWc-hq-b0V"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84788391487730064" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="ixj-Cm-ahJ" firstAttribute="centerY" secondItem="o2W-pE-kMI" secondAttribute="centerY" id="3zq-Nv-CzK"/>
+                        <constraint firstItem="ixj-Cm-ahJ" firstAttribute="centerX" secondItem="o2W-pE-kMI" secondAttribute="centerX" id="be7-O6-RPk"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="gH4-xT-sP8" secondAttribute="bottom" constant="8" id="27I-Re-RFy"/>
                 <constraint firstAttribute="trailing" secondItem="QlZ-Fp-FvT" secondAttribute="trailing" constant="8" id="30G-dq-Dmp"/>
                 <constraint firstAttribute="trailing" secondItem="QK5-eH-XpM" secondAttribute="trailing" constant="8" id="A1m-Ys-Y7G"/>
+                <constraint firstAttribute="bottom" secondItem="o2W-pE-kMI" secondAttribute="bottom" id="E8q-Da-cPB"/>
                 <constraint firstItem="QlZ-Fp-FvT" firstAttribute="top" secondItem="CZ9-dp-mRa" secondAttribute="bottom" constant="2" id="FYu-kE-j9C"/>
                 <constraint firstItem="2FV-7K-wKm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="JNu-hV-ojv"/>
                 <constraint firstItem="k3O-h5-WHo" firstAttribute="baseline" secondItem="2FV-7K-wKm" secondAttribute="baseline" id="KGY-Rc-GaK"/>
                 <constraint firstItem="l6A-E2-J6m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="PMJ-PH-Dp4"/>
+                <constraint firstAttribute="trailing" secondItem="o2W-pE-kMI" secondAttribute="trailing" id="RU0-xc-Gln"/>
                 <constraint firstItem="QlZ-Fp-FvT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Ssw-YW-d7W"/>
                 <constraint firstItem="CZ9-dp-mRa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="U3F-XL-ugZ"/>
                 <constraint firstAttribute="trailing" secondItem="CZ9-dp-mRa" secondAttribute="trailing" constant="8" id="Vgp-R6-EBg"/>
                 <constraint firstItem="gH4-xT-sP8" firstAttribute="leading" secondItem="l6A-E2-J6m" secondAttribute="trailing" constant="8" id="Vr5-hJ-VjC"/>
+                <constraint firstItem="o2W-pE-kMI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yrh-tS-0zY"/>
                 <constraint firstAttribute="bottom" secondItem="QK5-eH-XpM" secondAttribute="bottom" constant="8" id="fxA-jM-2ad"/>
                 <constraint firstAttribute="trailing" secondItem="2FV-7K-wKm" secondAttribute="trailing" constant="5" id="ji3-wh-y9N"/>
                 <constraint firstAttribute="bottom" secondItem="l6A-E2-J6m" secondAttribute="bottom" constant="8" id="jry-V9-dXP"/>
                 <constraint firstItem="2FV-7K-wKm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="o5X-zw-FY6"/>
                 <constraint firstItem="CZ9-dp-mRa" firstAttribute="top" secondItem="2FV-7K-wKm" secondAttribute="bottom" constant="8" id="oDY-4j-ViS"/>
+                <constraint firstItem="o2W-pE-kMI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pkc-Ty-EP3"/>
                 <constraint firstItem="k3O-h5-WHo" firstAttribute="trailing" secondItem="2FV-7K-wKm" secondAttribute="trailing" id="wjg-yF-hZh"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="backgroundView" destination="o2W-pE-kMI" id="Bab-9p-kdh"/>
                 <outlet property="distance" destination="QK5-eH-XpM" id="BQq-ap-XJb"/>
+                <outlet property="imageBack" destination="ixj-Cm-ahJ" id="8gL-Cb-ds8"/>
                 <outlet property="numberReviews" destination="gH4-xT-sP8" id="B9X-Zi-BTh"/>
                 <outlet property="restaurantCategories" destination="QlZ-Fp-FvT" id="JR5-eD-Ghh"/>
                 <outlet property="restaurantImage" destination="2FV-7K-wKm" id="wM7-DF-ArF"/>

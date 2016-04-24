@@ -10,7 +10,7 @@ import UIKit
 import TextFieldEffects
 import SCLAlertView
 
-class NameViewController: UIViewController {
+class NameViewController: UIViewController, UITextFieldDelegate {
 
     var nextCount = 0; // count increases once next is pressed once
     @IBOutlet var nameField: YoshikoTextField!
@@ -21,14 +21,36 @@ class NameViewController: UIViewController {
     var phone : String!;
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        nameField.delegate = self;
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         reAnimateView(nil, currPosInputBefore: nil);
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+
     
+    }
+    
+    func keyboardWillShow(sender: NSNotification) {
+        if let userInfo = sender.userInfo {
+            if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {
+                changeBottom.constant = keyboardHeight;
+                print(self.nextButton.frame.origin.y)
+
+            }
+        }
+    }
+    
+    
+    @IBOutlet var changeBottom: NSLayoutConstraint!
+    @IBOutlet var nextButton: UIButton!
+    
+    func textFieldShouldReturn( textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        nextButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside);
+        changeBottom.constant = 0;
+        return true;
     }
     
     @IBAction func pressedNext(sender: AnyObject) {
@@ -50,6 +72,7 @@ class NameViewController: UIViewController {
                     self.nameField.resignFirstResponder(); // makes it so that nameFiled is not selected if it is already
                 
                     self.nameLabel.text = "What's your phone number?";
+                    changeBottom.constant = 0
                 });
                 
                 nextCount += 1;
@@ -68,8 +91,9 @@ class NameViewController: UIViewController {
                     self.nameField.keyboardType = UIKeyboardType.NumberPad;
                     self.nameField.text = "";
                     self.nameField.resignFirstResponder(); // makes it so that nameFiled is not selected if it is already
-                    
+                    self.nameField.keyboardType = UIKeyboardType.Default;
                     self.nameLabel.text = "What type of food do you like?";
+                    changeBottom.constant = 0;
                 });
                 nextCount += 1;
             }
@@ -98,7 +122,6 @@ class NameViewController: UIViewController {
                 });
             }
             else {
-                print("OMG PLEASE BEHERE PLZ PLZ PLZPL PLZ");
                 AppDelegate.sharedInstanceAPI.joinUserSession(nameOfUser: name, phoneOfUser: phone, cuisine: cuisine, sessionId: creatingNewSession,  callback: {
                     (str : String!) in
                     
