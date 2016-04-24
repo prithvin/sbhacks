@@ -167,7 +167,7 @@ router.post("/create", function (req, res) {
 });
 
 router.post('/saveLatLong', function (req, res) {
-  if (showErrorsIfDataNotSent(req.body.Data, ["Latitude", "Longtitude", "SessionId", "PhoneNumber"], res)) {
+  if (showErrorsIfDataNotSent(req.body.Data, ["Latitude", "Longitude", "SessionId", "PhoneNumber"], res)) {
     // this means everything is valid and reday to gooo!!
     Session.findOne({SessionCode : req.body.Data.SessionId}, function (err, data) {
       if (err || data == null) {
