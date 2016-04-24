@@ -1,7 +1,10 @@
 var Session = require('../models/session');
 var express = require('express');
 var router = express.Router();
+
 var yelp = require('../yelp-api');
+// var yelp = require('../yelp-api');
+
 
 function generateSessionToken(callback) {
     var code = Math.floor(100000 + Math.random() * 900000);

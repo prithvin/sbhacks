@@ -37,6 +37,7 @@ function yelpAPI(searchPhrase, latitude, longitude, callback) {
       var distance = haversine(start, end);
       var category = _.flatten(business.categories);
 
+      restaurant['id'] = business.id;
       restaurant['title'] = business.name;
       restaurant['imageURL'] = business.image_url;
       restaurant['category'] = category.join(", ");
