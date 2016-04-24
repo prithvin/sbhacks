@@ -18,7 +18,7 @@ var sessionSchema = new Schema ({	//LATER - Trim schema
         {
           "YelpID": String,
           "NameOfRestaurant": String,
-          "Votes":[Number],   // Numebr is unique ID here (Phone number of people who voted)
+          "Votes":[Number],   // Number is unique ID here (Phone number of people who voted)
           "Location": {
             Latitude: Number,
             Longtitude: Number
