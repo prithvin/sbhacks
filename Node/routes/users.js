@@ -34,6 +34,7 @@ var Session = require('../models/session');
 var express = require('express');
 var assert = require('assert');
 var router = express.Router();
+var yelp = require('yelpAPI');
 
 function generateSessionToken(callback) {
     var code = Math.floor(100000 + Math.random() * 900000);
@@ -237,6 +238,38 @@ router.get('/getPeopleInSession', function (req, res) {
 
       }
      });
+  }
+});
+
+router.get('/getRestaurants', function (req, res) {
+  if (noErrorsIfDataNotSent(req.body.Data, ["SessionId", "PhoneNumber"], res)) {
+    Session.findOne({SessionCode : req.body.Data.SessionId}, function (err, data) {
+      if (err || data == null) {
+        generateError(res, "Looks like this session token is not valid!");
+      }
+      else if (data.Restaurants == null || data.Restaurants.length == 0 ) {
+        if (data.Users.length < 1) {
+           generateError(res, "This is not a valid sesion!");
+        }
+        else {
+          var cusines = data.Users[0].Cuisines;
+          var index = -1;
+          for (var x = 0; x < data.Users.length; x++) {
+              if (data.Users[x].PhoneNumber == req.body.Data.PhoneNumber) {
+                index = x;
+              }
+          }
+          if (index == -1) {
+            generateError(res, "You are not in the session!");
+          }
+          else {
+            yelpAPI(cusines, data.Users[index].Location.Latitude, data.Users[index].Location.Longitude, function (data) {
+              console.log(data);
+            })
+          }
+        }
+      }
+    }); 
   }
 });
 

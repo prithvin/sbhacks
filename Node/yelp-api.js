@@ -31,9 +31,6 @@ function yelpAPI(searchPhrase, latitude, longitude, callback) {
   
 }
 
-yelpAPI("indian",34.4,-119.8, function (data) {
-  console.log("OMG");
-});
 
 module.exports = yelpAPI;
 
