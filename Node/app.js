@@ -12,7 +12,8 @@ var restaurants = require('./routes/restaurants');
 var app = express();
 
 // mongoose.connect('mongodb://localhost/sessions');
-mongoose.connect('mongodb://sbhacks:sbhacks@olympia.modulusmongo.net:27017/wU7gusuw');
+// mongoose.connect('mongodb://sbhacks:sbhacks@olympia.modulusmongo.net:27017/wU7gusuw');
+mongoose.connect('mongodb://sbhacks:sbhacks@kahana.mongohq.com:10031/sconnect?replicaSet=set-53864c0222004f12f10024e2');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
