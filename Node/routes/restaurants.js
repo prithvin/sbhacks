@@ -26,7 +26,8 @@ function noErrorsIfDataNotSent(mainreqresbody, arroffields, res) {
     if (mainreqresbody == null) {
         generateError(res, "No data sent");
         return false;
-    } else if (!checkDoesExistReqRes(mainreqresbody, arroffields)) {
+    }
+    else if (!checkDoesExistReqRes(mainreqresbody, arroffields)) {
         generateError(res, "Not all the required data has been sent");
         return false;
     }
@@ -36,17 +37,22 @@ function noErrorsIfDataNotSent(mainreqresbody, arroffields, res) {
 
 // API 1
 // right swipe left swipe make restaurant a like
-router.post('/set', function(req, res) {
+router.post('/set', function (req, res) {
     console.log("HEY");
     if (req.body.Data == null) {
         generateError(res, "No data sent");
-    } else if (!checkDoesExistReqRes(req.body.Data, ["PhoneNumber", "SessionId"])) {
+    }
+    else if (!checkDoesExistReqRes(req.body.Data, ["PhoneNumber", "SessionId"])) {
         generateError(res, "Not all the required data has been sent");
-    } else {
-        Session.findOne({ SessionCode: req.body.Data.SessionId }, function(err, data) {
+    }
+    else {
+        Session.findOne({
+            SessionCode: req.body.Data.SessionId
+        }, function (err, data) {
             if (err || data == null) {
                 generateError(res, "Looks like this session token is not valid!");
-            } else {
+            }
+            else {
                 var phoneNo = parseInt(req.body.Data.PhoneNumber)
                 console.log("PH " + phoneNo.toString());
 
@@ -62,11 +68,20 @@ router.post('/set', function(req, res) {
                 //Help here
                 var updateObj = {}
 
-                Session.update({ "Restaurants.YelpID": restaurantId }, { $addToSet: { "Restaurants.$.Votes": phoneNo.toString() } }, function(err, up) {
+                Session.update({
+                    "Restaurants.YelpID": restaurantId
+                }, {
+                    $addToSet: {
+                        "Restaurants.$.Votes": phoneNo.toString()
+                    }
+                }, function (err, up) {
                     if (err)
                         generateError(res, err);
                     else
-                        res.send({ "Status": "SUCCESS", "Data": "Thank you for voting!" });
+                        res.send({
+                            "Status": "SUCCESS",
+                            "Data": "Thank you for voting!"
+                        });
                 });
             }
         });
@@ -75,15 +90,18 @@ router.post('/set', function(req, res) {
 
 // API 2
 // return 5 top restaurants based on likes
-router.get('/votes/:sessionId', function(req, res) {
+router.get('/votes/:sessionId', function (req, res) {
     var restaurants = [];
-    Session.find({ SessionCode: req.params.sessionId }, 'Restaurants', function(err, items) {
+    Session.find({
+        SessionCode: req.params.sessionId
+    }, 'Restaurants', function (err, items) {
         if (items.length > 0) {
             restaurants = items[0].Restaurants;
-            res.send(_.take(restaurants.sort(function(a, b) {
+            res.send(_.take(restaurants.sort(function (a, b) {
                 return b.Votes.length - a.Votes.length;
             }), 5));
-        } else
+        }
+        else
             generateError(res, "Session ID not found");
     });
 });
